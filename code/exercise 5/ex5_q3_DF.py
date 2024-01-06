@@ -65,7 +65,7 @@ reverse_df = reverse_df.withColumn("ZIPcode", col("ZIPcode").cast(LongType()))
 reverse_df = reverse_df.withColumn("LON", col("LON").cast(DoubleType()))
 reverse_df = reverse_df.withColumn("LAT", col("LAT").cast(DoubleType()))
 #print('++++++++++++++++++++++++++++++++++++')
-reverse_df.show()
+#reverse_df.show()
 #########################################################
 # Convert the Integer type columns
 df = df.withColumn("DR_NO", col("DR_NO").cast(LongType()))  #Int 64
@@ -193,7 +193,7 @@ unique_lat_lon_pairs = joined_df.select("LAT", "LON").dropDuplicates()
 filtered_df = df.join(unique_lat_lon_pairs, ["LAT", "LON"], "inner")
 
 # Show the resulting DataFrame
-filtered_df.show()
+#filtered_df.show()
 
 # Group by "Vict Descent" and count the rows for each group
 vict_descent_counts = filtered_df.groupBy("Full Descent").count()
