@@ -1,0 +1,26 @@
+Αφού έχουμε κάνει start τα δυο VM στο okeanos-knossos, από το command prompt συνδεόμαστε με τις εντολές:
+
+master:
+$ ssh user@snf-39567.ok-kno.grnetcloud.net
+Password: UBU1P4!t
+
+worker:
+$ ssh user@snf-39568.ok-kno.grnetcloud.net
+Password: UBU1P6!t
+
+Αφού συνδεθούμε τρέχουμε τις παρακάτω εντολές στο master:
+
+$ start-dfs.sh 
+//για εκκίνηση του hdfs και ελέγχουμε στη διεύθυνση http://83.212.81.198:9870
+
+$ start-υαρν.sh 
+//εκκίνηση του yarn και επιβεβαίωση στη διεύθυνση http://83.212.81.198:8088
+
+$SPARK_HOME/sbin/start-history-server.sh
+//εκκίνηση spark-history-server και επιβεβαίωση στη διεύθυνση http://83.212.81.198:18080
+
+Στη συνέχεια στο φάκελο code, υπάρχουν οι αντίστοιχοι φάκελοι με τον κώδικα για την υλοποίηση των ασκήσεων.
+
+
+
+
