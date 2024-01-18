@@ -13,7 +13,7 @@ Password: UBU1P6!t
 $ start-dfs.sh 
 //για εκκίνηση του hdfs και ελέγχουμε στη διεύθυνση http://83.212.81.198:9870
 
-$ start-υαρν.sh 
+$ start-yarn.sh 
 //εκκίνηση του yarn και επιβεβαίωση στη διεύθυνση http://83.212.81.198:8088
 
 $SPARK_HOME/sbin/start-history-server.sh
