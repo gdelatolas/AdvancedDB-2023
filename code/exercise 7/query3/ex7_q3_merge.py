@@ -149,11 +149,19 @@ last_3_rows = sorted_income_df.orderBy("Estimated Median Income", ascending=Fals
 # Concatenate the DataFrames
 new_df = last_3_rows.union(first_3_rows)
 
-# Inner join of reverse_df and new_df on zip code
-joined_df = reverse_df.join(merge(new_df.select("Zip Code")), reverse_df["ZIPcode"] == new_df["Zip Code"], "inner")
+# Inner join of reverse_df and new_df on zip code with shuffle_replicate_nl hint
+
+joined_df = reverse_df.join(
+    new_df.select("Zip Code").hint("shuffle_replicate_nl"),
+    reverse_df["ZIPcode"] == new_df["Zip Code"],
+    "inner"
+)
+
 # Drop the extra col zip code
 joined_df.drop("ZIPcode")
 
+# Show the resulting DataFrame
+#joined_df.show()
 
 #new_df.show()
 unique_zipcodes = joined_df.select("Zip Code").distinct()
@@ -161,9 +169,16 @@ unique_zipcodes = joined_df.select("Zip Code").distinct()
 #unique_zipcodes.show()
 unique_lat_lon_pairs = joined_df.select("LAT", "LON").dropDuplicates()
 
+# Show the unique pairs of LAT and LON
+#unique_lat_lon_pairs.show()
 
 # Join df with unique_lat_lon_pairs on LAT and LON columns
-filtered_df = df.join(merge(unique_lat_lon_pairs), ["LAT", "LON"], "inner")
+
+filtered_df = df.join(
+        unique_lat_lon_pairs.hint("shuffle_replicate_nl"),
+        ["LAT", "LON"],
+        "inner"
+)
 
 # Group by "Vict Descent" and count the rows for each group
 vict_descent_counts = filtered_df.groupBy("Full Descent").count()
