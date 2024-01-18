@@ -186,7 +186,7 @@ unique_lat_lon_pairs = joined_df.select("LAT", "LON").dropDuplicates()
 
 #############################
 # Join df with unique_lat_lon_pairs on LAT and LON columns
-filtered_df = df.join(unique_lat_lon_pairs, ["LAT", "LON"], "inner").hint("shuffle_hash")
+filtered_df = df..hint("SHUFFLE_HASH").join(unique_lat_lon_pairs, ["LAT", "LON"], "inner")
 
 # Show the resulting DataFrame
 filtered_df.show()
