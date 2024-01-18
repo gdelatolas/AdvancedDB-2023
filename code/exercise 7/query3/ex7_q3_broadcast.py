@@ -5,7 +5,7 @@ from pyspark.sql.types import StructType, StructField, LongType, IntegerType, St
 # Create a SparkSession
 spark = SparkSession \
     .builder \
-    .appName("DF query 3 execution") \
+    .appName("DF query 3 execution with broadcast join") \
     .getOrCreate()
 
 # Define the schema for the crime dataset
