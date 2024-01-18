@@ -170,7 +170,7 @@ for i in range(5):
 """
 
 # Inner join of reverse_df and new_df on zip code
-joined_df = reverse_df.join(new_df.select("Zip Code"), reverse_df["ZIPcode"] == new_df["Zip Code"], "inner").hint("shuffle_hash")
+joined_df = reverse_df.hint("SHUFFLE_HASH").join(new_df.select("Zip Code"), reverse_df["ZIPcode"] == new_df["Zip Code"], "inner")
 # Drop the extra col zip code
 joined_df.drop("ZIPcode")
 
@@ -186,7 +186,7 @@ unique_lat_lon_pairs = joined_df.select("LAT", "LON").dropDuplicates()
 
 #############################
 # Join df with unique_lat_lon_pairs on LAT and LON columns
-filtered_df = df..hint("SHUFFLE_HASH").join(unique_lat_lon_pairs, ["LAT", "LON"], "inner")
+filtered_df = df.hint("SHUFFLE_HASH").join(unique_lat_lon_pairs, ["LAT", "LON"], "inner")
 
 # Show the resulting DataFrame
 filtered_df.show()
