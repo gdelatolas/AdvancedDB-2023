@@ -152,7 +152,7 @@ new_df = last_3_rows.union(first_3_rows)
 # Inner join of reverse_df and new_df on zip code with shuffle_replicate_nl hint
 
 joined_df = reverse_df.join(
-    new_df.select("Zip Code").hint("shuffle_replicate_nl"),
+    new_df.select("Zip Code").hint("merge"),
     reverse_df["ZIPcode"] == new_df["Zip Code"],
     "inner"
 )
@@ -175,7 +175,7 @@ unique_lat_lon_pairs = joined_df.select("LAT", "LON").dropDuplicates()
 # Join df with unique_lat_lon_pairs on LAT and LON columns
 
 filtered_df = df.join(
-        unique_lat_lon_pairs.hint("shuffle_replicate_nl"),
+        unique_lat_lon_pairs.hint("merge"),
         ["LAT", "LON"],
         "inner"
 )
