@@ -8,6 +8,10 @@ spark = SparkSession \
     .appName("DF query 3 execution") \
     .getOrCreate()
 
+#For shuffle_hash
+spark.conf.set("spark.sql.BroadcastJoinThreshold", "-1")
+spark.conf.set("spark.sql.join.preferSortMergeJoin", "false")
+
 # Define the schema for the crime dataset
 crime_schema = StructType([
     StructField("DR_NO", StringType()),
