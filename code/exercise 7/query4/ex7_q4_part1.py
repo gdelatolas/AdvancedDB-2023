@@ -125,13 +125,13 @@ df = df.withColumn("Year", year(col("DATE OCC")))
 filtered_df = df.filter((col("Weapon Used Cd") >= 100) & (col("Weapon Used Cd") <= 199))
 
 # Join police_df and filtered_df based on AREA and PREC columns using different hints
-join_hints = ["BROADCAST", "MERGE", "SHUFFLE_HASH", "SHUFFLE_REPLICATE_NL"]
+join_hints = ["broadcast", "merge", "SHUFFLE_HASH", "SHUFFLE_REPLICATE_NL"]
 result_dfs = []
 
 for hint in join_hints:
 
   # Join police_df and filtered_df based on AREA and PREC columns
-  joined_df = police_df.join(filtered_df, police_df["PREC"] == filtered_df["AREA"])
+  joined_df = police_df.join(filtered_df.hint(hint), police_df["PREC"] == filtered_df["AREA"])
 
   # Keep specific columns in the result
   result_df = joined_df.select("Y", "X", "LAT", "LON", "Year")
