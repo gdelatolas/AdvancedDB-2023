@@ -6,7 +6,7 @@
 
 | Asset | Technologies Used |
 | ----- | ----------- |
-| code | Python, SQL |
+| code | Python, SQL, RDD |
 | public cloud | okeanos-knossos |
 
 
