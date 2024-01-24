@@ -21,6 +21,9 @@ $SPARK_HOME/sbin/start-history-server.sh
 
 Στη συνέχεια στο φάκελο code, υπάρχουν οι αντίστοιχοι φάκελοι με τον κώδικα για την υλοποίηση των ασκήσεων.
 
+Τα αρχεία για κάθε query τα εκτελούμε με την παρακάτω εντολή
+spark-submit --conf "spark.driver.extraJavaOptions=-Dspark.log.level=WARN" --num-executors {X} filename.py
+
 
 
 
